@@ -88,7 +88,13 @@ console.log(first + " and " + second); // 2 and 1
                     <section>
                     <h2>with Objects</h2>
                     <pre><code class="javascript" data-trim contenteditable>
-let {firstname, lastname] = {firstname: 'Peter', lastname: 'Parker'};
+let hero = { 
+    firstname: 'Peter', 
+    lastname: 'Parker'
+};
+
+let {firstname, lastname} = hero;
+                            
 console.log(`Spiderman is ${firstname} ${lastname}`);
                     </code></pre>
                 </section>
@@ -106,13 +112,13 @@ console.log(`Spiderman is ${firstname} ${lastname}`);
                         Exporting
                     </p>
                     <pre><code class="javascript" data-trim contenteditable>
-var local = "I'm local";
+let local = "I'm local";
 
 export default function myAwesomeModuleFunction() {
     /* some awesome function stuff */
 }
 
-export var public = "I'm public!";
+export const PUBLIC = "I'm public!";
                     </code></pre>
                 </section>
                 <section>
@@ -127,7 +133,7 @@ awesomeModule.myAwesomeModuleFunction();
 import as awesomeModule from "lib/myModule";
 awesomeModule();
 
-import public as publicVar from "lib/myModule";
+import PUBLIC as publicVar from "lib/myModule";
 console.log(publicVar}; // I'm public!
 
                     </code></pre>
