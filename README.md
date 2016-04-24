@@ -18,13 +18,13 @@ By the time that the workshop is over, all of your tests will be passing.
 ###Clone the repo
 You will need to start by cloning this repo. From your terminal, type:
 ```
-git clone https://github.com/aaronfrost/es6-workshop.git && cd es6-workshop
+git clone https://github.com/webplatformz/es6-workshop.git && cd es6-workshop
 ```
 
 ###Install Dependencies
 Once you have cloned the repo, in need to install the local dependencies. From your terminal, type:
 ```
-npm install --global babel && npm install
+npm install
 ```
 
 *Note that this step will install `Babel` globally. This project uses Babel to provide support for ES6 syntax. Without
