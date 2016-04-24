@@ -76,13 +76,20 @@ AWESOME_CONSTANT = 50;//AWESOME_CONSTANT is read-only
 let [first, second] = [1, 2, 3, 4];
 console.log(first + " and " + second); // 1 and 2
 
-//With rest param (later)
+//With rest param
 let [first, ...rest] = [1, 2, 3, 4];
 console.log(rest); // 2,3,4
 
 //swapping
 [first, second] = [second, first];
 console.log(first + " and " + second); // 2 and 1
+                    </code></pre>
+                </section>
+                    <section>
+                    <h2>with Objects</h2>
+                    <pre><code class="javascript" data-trim contenteditable>
+let {firstname, lastname] = {firstname: 'Peter', lastname: 'Parker'};
+console.log(`Spiderman is ${firstname} ${lastname}`);
                     </code></pre>
                 </section>
             </section>
