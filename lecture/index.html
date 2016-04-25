@@ -40,6 +40,78 @@
                     <div style="margin-top: 40px; font-weight: bold; letter-spacing: 0.2em;" class="fragment" data-fragment-index="1">ECMA Script 2015</div>
                 </div>
             </section>
+            
+            <section>
+                <section data-state='orange'>
+                    <div class="zuehlke-center">
+                        <div class="zuehlke-splash-title">Arrays</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>findIndex(callback[, thisArg])</h2>
+                    <br>
+                    <pre><code class="javascript" data-trim contenteditable>
+let array = [
+    { name: "Luc Conrad", actor: "Mike Müller" },
+    { name: "Anna-Maria Giovanoli", actor: "Barbara Terpoorten" },
+    { name: "Fabio Testi", actor: "Reto Stalder" }
+];
+
+console.log(
+    array.findIndex(
+      (element) => element.actor === "Reto Stalder"
+    )
+);
+// 2
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>find(callback[, thisArg])</h2>
+                    <br>
+                    <pre><code class="javascript" data-trim contenteditable>
+let array = [
+    { name: "Luc Conrad", actor: "Mike Müller" },
+    { name: "Anna-Maria Giovanoli", actor: "Barbara Terpoorten" },
+    { name: "Fabio Testi", actor: "Reto Stalder" }
+];
+
+console.log(
+    array.find(
+      (element) => element.actor === "Reto Stalder"
+    )
+);
+// { name: "Fabio Testi", actor: "Reto Stalder" }
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>fill(value[, start = 0[, end = this.length]])</h2>
+                    <br>
+                    <pre><code class="javascript" data-trim contenteditable>
+let array = [1, 2, 3].fill(4);
+console.log(array); // 4, 4, 4
+
+array.fill(1, -1, array.length);
+console.log(array); // 4, 4, 1
+                    </code></pre>
+                </section>
+                <section>
+                    <h2>from(arrayLike[, mapFn[, thisArg]])</h2>
+                    <br>
+                    <pre><code class="javascript" data-trim contenteditable>
+// ES 5
+function noParams() {
+    var params = Array.prototype.slice.call(arguments, 0);
+    /* Awesome Function stuff */
+}
+
+// ES 6
+function noParams() {
+    var params = Array.from(arguments);
+    /* Awesome Function stuff */
+}
+                    </code></pre>
+                </section>
+            </section>
 
             <section>
                 <section data-state='orange'>
@@ -394,78 +466,6 @@ weakMap.get(o1);//'is awesome'
             <section>
                 <section data-state='orange'>
                     <div class="zuehlke-center">
-                        <div class="zuehlke-splash-title">Arrays</div>
-                    </div>
-                </section>
-                <section>
-                    <h2>findIndex(callback[, thisArg])</h2>
-                    <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-let array = [
-    { name: "Luc Conrad", actor: "Mike Müller" },
-    { name: "Anna-Maria Giovanoli", actor: "Barbara Terpoorten" },
-    { name: "Fabio Testi", actor: "Reto Stalder" }
-];
-
-console.log(
-    array.findIndex(
-      (element) => element.actor === "Reto Stalder"
-    )
-);
-// 2
-                    </code></pre>
-                </section>
-                <section>
-                    <h2>find(callback[, thisArg])</h2>
-                    <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-let array = [
-    { name: "Luc Conrad", actor: "Mike Müller" },
-    { name: "Anna-Maria Giovanoli", actor: "Barbara Terpoorten" },
-    { name: "Fabio Testi", actor: "Reto Stalder" }
-];
-
-console.log(
-    array.find(
-      (element) => element.actor === "Reto Stalder"
-    )
-);
-// { name: "Fabio Testi", actor: "Reto Stalder" }
-                    </code></pre>
-                </section>
-                <section>
-                    <h2>fill(value[, start = 0[, end = this.length]])</h2>
-                    <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-let array = [1, 2, 3].fill(4);
-console.log(array); // 4, 4, 4
-
-array.fill(1, -1, array.length);
-console.log(array); // 4, 4, 1
-                    </code></pre>
-                </section>
-                <section>
-                    <h2>from(arrayLike[, mapFn[, thisArg]])</h2>
-                    <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-// ES 5
-function noParams() {
-    var params = Array.prototype.slice.call(arguments, 0);
-    /* Awesome Function stuff */
-}
-
-// ES 6
-function noParams() {
-    var params = Array.from(arguments);
-    /* Awesome Function stuff */
-}
-                    </code></pre>
-                </section>
-            </section>
-                
-            <section>
-                <section data-state='orange'>
-                    <div class="zuehlke-center">
                         <div class="zuehlke-splash-title">Generators</div>
                     </div>
                 </section>
@@ -549,34 +549,6 @@ p.a = 1;
 
 console.log(p.a); // 1
 console.log(p.c); // 37
-                    </code></pre>
-                </section>
-            </section>
-                
-            <section>
-                <section data-state='orange'>
-                    <div class="zuehlke-center">
-                        <div class="zuehlke-splash-title">Symbols</div>
-                    </div>
-                </section>
-                <section>
-                    <h2>Symbols</h2>
-                    <p>
-                        Symbols are always unique
-                    </p>
-                    <pre><code class="javascript" data-trim contenteditable>
-console.log(Symbol() === Symbol()); // false
-
-console.log(Symbol()); // e.g. __$170629571$32$__
-                    </code></pre>
-                </section>
-                <section>
-                    <h2>WAT?</h2>
-                    <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-let map = new Map();
-
-map.set(Symbol(), "Where am I?");
                     </code></pre>
                 </section>
             </section>
