@@ -148,7 +148,7 @@ console.log(publicVar}; // I'm public!
                 </section>
                 <section>
                     <h2>Object Literal</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 let firstName = "Spongebob";
 let lastName = "Squarepants";
@@ -164,7 +164,7 @@ console.log({
                 </section>
                 <section>
                     <h2>Object.is</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 NaN === NaN; //false
 
@@ -263,8 +263,8 @@ log(); // Aaaah!
                     </code></pre>
                 </section>
                 <section>
-                    <h2>Spread & Rest</h2>
-                    <br />
+                    <h2>Spread &amp; Rest</h2>
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 var langs = ["C#", "Java", "JavaScript"];
 
@@ -281,7 +281,7 @@ processLanguages(...langs);
                 </section>
                 <section>
                     <h2>Named Parameters</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 let person = { lastName: "Müller" };
 
@@ -302,7 +302,7 @@ logPerson(person); // Hallo Manfred Müller
                 </section>
                 <section>
                     <h2>Class</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 class Car {
   constructor(name) {
@@ -320,7 +320,7 @@ console.log(car.getName()); // Elfriede
                 </section>
                 <section>
                     <h2>Child Class</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 class SpecialCar extends Car {
   constructor(name) {
@@ -342,28 +342,51 @@ console.log(car.getSpecialName()); // Elfriede
             <section>
                 <section data-state='orange'>
                     <div class="zuehlke-center">
-                        <div class="zuehlke-splash-title">Sets &nbsp; Maps</div>
+                        <div class="zuehlke-splash-title">Sets &amp; Maps</div>
                     </div>
                 </section>
                 <section>
                     <h2>Set</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
+let set = new Set();
 
+set.add('GoT Season 6');
+
+set.has('GoT Season 6');//true
                     </code></pre>
                 </section>
                 <section>
                     <h2>Map</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
+let map = new Map();
 
+map.set('John Snow', {alive: 'Unknown'});
+
+map.get('John Snow');//Object{alive: 'Unknown'}
                     </code></pre>
                 </section>
                 <section>
                     <h2>Weakmap</h2>
-                    <br />
+                    <br>
+                    <ul>
+                        <li>Weak References</li>
+                        <li>Garbage Collected when no other Ref</li>
+                        <li>No iterator over keys</li>
+                        <li>No primitive Keys</li>
+                    </ul>
+                </section>
+                <section>
+                    <br>
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
+let weakMap = new WeakMap(),
+    o1 = {name: 'Fast\'n\'Loud'};
 
+weakMap.set(o1, 'is awesome');
+
+weakMap.get(o1);//'is awesome'
                     </code></pre>
                 </section>
             </section>
@@ -376,7 +399,7 @@ console.log(car.getSpecialName()); // Elfriede
                 </section>
                 <section>
                     <h2>findIndex(callback[, thisArg])</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 let array = [
     { name: "Luc Conrad", actor: "Mike Müller" },
@@ -394,7 +417,7 @@ console.log(
                 </section>
                 <section>
                     <h2>find(callback[, thisArg])</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 let array = [
     { name: "Luc Conrad", actor: "Mike Müller" },
@@ -412,7 +435,7 @@ console.log(
                 </section>
                 <section>
                     <h2>fill(value[, start = 0[, end = this.length]])</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 let array = [1, 2, 3].fill(4);
 console.log(array); // 4, 4, 4
@@ -423,7 +446,7 @@ console.log(array); // 4, 4, 1
                 </section>
                 <section>
                     <h2>from(arrayLike[, mapFn[, thisArg]])</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 // ES 5
 function noParams() {
@@ -448,7 +471,7 @@ function noParams() {
                 </section>
                 <section>
                     <h2>function*</h2>
-                    <br />
+                    <br>
                     <ul>
                         <li>functions</li>
                         <li>Can be exited and re-entered</li>
@@ -460,7 +483,7 @@ function noParams() {
                 </section>
                 <section>
                     <h2>Generators</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 function* idMaker(){
     var index = 0;
@@ -477,7 +500,7 @@ console.log(generator.next().value); // 2
                 </section>
                 <section>
                     <h2>Generators</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 function* fibonacci(i) {
   let a = 0, b = 1;
@@ -503,7 +526,7 @@ for(let value of fibonacci(1000)) {
                 </section>
                 <section>
                     <h2>Proxies</h2>
-                    <br />
+                    <br>
                     <ul>
                         <li>Custom Behaviour for fundamental operations</li>
                         <li>property lookup, assignment, enumeration, function invocation, etc</li>
@@ -511,7 +534,7 @@ for(let value of fibonacci(1000)) {
                 </section>
                 <section>
                     <h2>Proxies</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 var handler = {
     get: function(target, name){
@@ -549,7 +572,7 @@ console.log(Symbol()); // e.g. __$170629571$32$__
                 </section>
                 <section>
                     <h2>WAT?</h2>
-                    <br />
+                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 let map = new Map();
 
