@@ -1,6 +1,6 @@
 //WRITE YOUR IMPORT STATEMENTS HERE
-import Mathy from '../common/Mathy';
-import myMathy from '../common/Mathy';
+import * as Mathy from '../common/Mathy';
+import * as myMathy from '../common/Mathy';
 import _ from 'lodash';
 import {sqrt as mySqrt, square as mySquare} from '../common/Mathy';
 

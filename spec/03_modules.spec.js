@@ -1,5 +1,5 @@
 //WRITE YOUR IMPORT STATEMENTS HERE
-import Mathy from '../common/Mathy';
+import * as Mathy from '../common/Mathy';
 
 
 
