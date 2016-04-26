@@ -40,6 +40,12 @@
                     <div style="margin-top: 40px; font-weight: bold; letter-spacing: 0.2em;" class="fragment" data-fragment-index="1">ECMA Script 2015</div>
                 </div>
             </section>
+
+            <section>
+                <div class="zuehlke-center">
+                    <a href="https://github.com/webplatformz/es6-workshop.git">https://github.com/webplatformz/es6-workshop.git</a>
+                </div>
+            </section>
             
             <section>
                 <section data-state='orange'>
@@ -462,7 +468,42 @@ weakMap.get(o1);//'is awesome'
                     </code></pre>
                 </section>
             </section>
-                
+
+            <section>
+                <section data-state='orange'>
+                    <div class="zuehlke-center">
+                        <div class="zuehlke-splash-title">Proxies</div>
+                    </div>
+                </section>
+                <section>
+                    <h2>Proxies</h2>
+                    <br>
+                    <ul>
+                        <li>Custom Behaviour for fundamental operations</li>
+                        <li>property lookup, assignment, enumeration, function invocation, etc</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Proxies</h2>
+                    <br>
+                    <pre><code class="javascript" data-trim contenteditable>
+var handler = {
+    get: function(target, name){
+        return name in target?
+            target[name] :
+            37;
+    }
+};
+
+var p = new Proxy({}, handler);
+p.a = 1;
+
+console.log(p.a); // 1
+console.log(p.c); // 37
+                    </code></pre>
+                </section>
+            </section>
+
             <section>
                 <section data-state='orange'>
                     <div class="zuehlke-center">
@@ -517,42 +558,7 @@ for(let value of fibonacci(1000)) {
                     </code></pre>
                 </section>
             </section>
-            
-            <section>
-                <section data-state='orange'>
-                    <div class="zuehlke-center">
-                        <div class="zuehlke-splash-title">Proxies</div>
-                    </div>
-                </section>
-                <section>
-                    <h2>Proxies</h2>
-                    <br>
-                    <ul>
-                        <li>Custom Behaviour for fundamental operations</li>
-                        <li>property lookup, assignment, enumeration, function invocation, etc</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Proxies</h2>
-                    <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-var handler = {
-    get: function(target, name){
-        return name in target?
-            target[name] :
-            37;
-    }
-};
 
-var p = new Proxy({}, handler);
-p.a = 1;
-
-console.log(p.a); // 1
-console.log(p.c); // 37
-                    </code></pre>
-                </section>
-            </section>
-                
             <section data-transition="linear" data-state="zuehlke-bg-parallax" data-parallax-step=0>
                 <div class="zuehlke-center">
                     <div class="zuehlke-splash-title">Do we still need Babel?</div>
