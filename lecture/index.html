@@ -47,7 +47,7 @@
 
         <section>
             <div class="zuehlke-center">
-                <a href="https://github.com/fabiankeller/es6-workshop.git">https://github.com/fabiankeller/es6-workshop.git</a>
+                git clone <a href="https://github.com/fabiankeller/es6-workshop.git">https://github.com/fabiankeller/es6-workshop.git</a>
             </div>
         </section>
 
@@ -59,7 +59,7 @@
                     <li class="fragment" data-fragment-index="2">destructuring</li>
                     <li class="fragment" data-fragment-index="3">modules</li>
                     <li class="fragment" data-fragment-index="4">object-literal</li>
-                    <li class="fragment" data-fragment-index="5">parameters</li>
+                    <li class="fragment" data-fragment-index="5">default parameters</li>
                     <li class="fragment" data-fragment-index="6">spread &amp; rest</li>
                     <li class="fragment" data-fragment-index="7">arrow functions (lambdas)</li>
                     <li class="fragment" data-fragment-index="8">classes</li>
@@ -67,7 +67,13 @@
                 </ul>
             </div>
         </section>
-
+        <section>
+            <section data-state='orange'>
+                <div class="zuehlke-center">
+                    <div class="zuehlke-splash-title">ES6 in SAM</div>
+                </div>
+            </section>
+        </section>
         <section>
             <section data-state='orange'>
                 <div class="zuehlke-center">
@@ -78,7 +84,6 @@
                 <div>
                     <h2>var</h2>
                     <p>function scoped variable</p>
-                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 // ES5
 
@@ -97,7 +102,6 @@ function varTest() {
                 <div>
                     <h2>let</h2>
                     <p>block scoped variable</p>
-                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 // ES6
 
@@ -116,7 +120,6 @@ function varTest() {
                 <div>
                     <h2>const</h2>
                     <p>block scoped constant variable</p>
-                    <br>
                     <pre><code class="javascript" data-trim contenteditable>
 // ES6
 
@@ -127,6 +130,15 @@ const COLOR = {
 }
 
 // cannot be reassigned or redeclared
+                    </code></pre>
+                </div>
+            </section>
+            <section>
+                <div>
+                    <h2>Exercise 1</h2>
+                    <p>file: spec/01_let_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/01_let_spec.js
                     </code></pre>
                 </div>
             </section>
@@ -165,9 +177,18 @@ let hero = {
 let {firstname, lastname} = hero;
 let {firstname:first, lastname:last} = hero;
 
-console.log(`Spiderman is ${firstname} ${lastname}`);
+console.log(`Spiderman is ${first} ${last}`);
 // Spiderman is Peter Parker
                     </code></pre>
+            </section>
+            <section>
+                <div>
+                    <h2>Exercise 2</h2>
+                    <p>file: spec/02_destructuring_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/02_destructuring_spec.js
+                    </code></pre>
+                </div>
             </section>
         </section>
         <section>
@@ -208,6 +229,15 @@ console.log(publicVar}; // I'm public!
 
                     </code></pre>
             </section>
+            <section>
+                <div>
+                    <h2>Exercise 3</h2>
+                    <p>file: spec/03_modules_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/03_modules_spec.js
+                    </code></pre>
+                </div>
+            </section>
         </section>
         <section>
             <section data-state='orange'>
@@ -217,8 +247,28 @@ console.log(publicVar}; // I'm public!
             </section>
             <section>
                 <h2>Object Literal</h2>
+                <p>old way</p>
+                    <pre><code class="javascript" data-trim contenteditable>
+// ES5
+
+let firstName = "Spongebob";
+let lastName = "Squarepants";
+
+console.log({
+    firstname: firstName,
+    lastname: lastName,
+    getName: getName() {
+        return firstName + " " + lastName;
+    }
+});
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Object Literal</h2>
                 <br>
                     <pre><code class="javascript" data-trim contenteditable>
+// ES6
+
 let firstName = "Spongebob";
 let lastName = "Squarepants";
 
@@ -258,6 +308,15 @@ Object.assign(a, b);
 */
                     </code></pre>
             </section>
+            <section>
+                <div>
+                    <h2>Exercise 4</h2>
+                    <p>file: spec/04_object-literal_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/04_object-literal_spec.js
+                    </code></pre>
+                </div>
+            </section>
         </section>
         <section>
             <section data-state="orange">
@@ -267,8 +326,9 @@ Object.assign(a, b);
             </section>
             <section>
                 <h2>default parameter values</h2>
+                <p>old way</p>
                     <pre><code class="javascript">
-// < ES6
+// ES5
 
 function add(x, y) {
 	x = x || 11;
@@ -296,7 +356,7 @@ function add(x = 11, y = 12) {      // default values
 add();      // 23
 add(5, 6);      // 11
 add(5);     // 17
-add(null, 6);       // 6 (null is equal to 0)
+add(null, 6);       // 6 (null is interpreted as 0)
 add(0, 42);     // 42
 
                     </code></pre>
@@ -324,6 +384,15 @@ function logPerson({ firstName = "Manfred", lastName}) {
 
 logPerson(person); // Hallo Manfred Müller
                     </code></pre>
+            </section>
+            <section>
+                <div>
+                    <h2>Exercise 5</h2>
+                    <p>file: spec/05_parameters_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/05_parameters_spec.js
+                    </code></pre>
+                </div>
             </section>
         </section>
         <section>
@@ -358,6 +427,15 @@ function bar(x, y, …z) {
 bar(1, 2, 3, 4, 5);	 // 1, 2, [3, 4, 5]
 
                     </code></pre>
+            </section>
+            <section>
+                <div>
+                    <h2>Exercise 6</h2>
+                    <p>file: spec/06_spread_rest_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/06_spread_rest_spec.js
+                    </code></pre>
+                </div>
             </section>
         </section>
         <section>
@@ -405,6 +483,15 @@ let reorgBuilder = {
 let newReorg = reorgBuilder.createNewReorg();
 newReorg();
                     </code></pre>
+            </section>
+            <section>
+                <div>
+                    <h2>Exercise 7</h2>
+                    <p>file: spec/07_arrow_spec.js</p>
+                    <pre><code class="dos" data-trim contenteditable>
+npm test spec/07_arrow_rest_spec.js
+                    </code></pre>
+                </div>
             </section>
         </section>
 
@@ -483,30 +570,14 @@ map.set('John Snow', {alive: 'Unknown'});
 map.get('John Snow');//Object{alive: 'Unknown'}
                     </code></pre>
             </section>
-            <section>
-                <h2>Weakmap</h2>
-                <br>
-                <ul>
-                    <li>Weak References</li>
-                    <li>Garbage Collected when no other Ref</li>
-                    <li>No iterator over keys</li>
-                    <li>No primitive Keys</li>
-                </ul>
-            </section>
-            <section>
-                <br>
-                <br>
-                    <pre><code class="javascript" data-trim contenteditable>
-let weakMap = new WeakMap(),
-    o1 = {name: 'Fast\'n\'Loud'};
-
-weakMap.set(o1, 'is awesome');
-
-weakMap.get(o1);//'is awesome'
-                    </code></pre>
-            </section>
         </section>
+        
 
+        <section>
+            <div class="zuehlke-center">
+                <a href="https://github.com/getify/You-Dont-Know-JS">https://github.com/getify/You-Dont-Know-JS</a>
+            </div>
+        </section>
         <section data-transition="linear" data-state="zuehlke-bg-parallax" data-parallax-step=0>
             <div class="zuehlke-center">
                 <div class="zuehlke-splash-title">Any Questions?</div>
