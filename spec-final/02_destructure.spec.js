@@ -1,4 +1,4 @@
-
+// @formatter:off
 jest.autoMockOff();
 
 function getAddress(){

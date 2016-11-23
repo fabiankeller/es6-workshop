@@ -1,8 +1,9 @@
-//WRITE YOUR IMPORT STATEMENTS HERE
-import * as Mathy from '../common/Mathy';
-import * as myMathy from '../common/Mathy';
-import _ from 'lodash';
-import {sqrt as mySqrt, square as mySquare} from '../common/Mathy';
+// @formatter:off
+// WRITE YOUR IMPORT STATEMENTS HERE
+import * as Mathy from "../common/Mathy";
+import * as myMathy from "../common/Mathy";
+import {sqrt as mySqrt, square as mySquare} from "../common/Mathy";
+import _ from "lodash";
 
 
 jest.autoMockOff();

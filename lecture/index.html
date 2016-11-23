@@ -200,9 +200,34 @@ npm test spec/02_destructuring_spec.js
             <section>
                 <h2>Modules</h2>
                 <p>
+                    Old way
+                </p>
+                    <pre><code class="javascript" data-trim contenteditable>
+// ES5
+
+function Hello(name) {
+    function greeting() {
+        console.log( "Hello " + name + "!" );
+    }
+
+    // public API
+    return {
+        greeting: greeting
+    };
+}
+
+var me = Hello( "Kyle" );
+me.greeting();          // Hello Kyle!
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Modules</h2>
+                <p>
                     Exporting
                 </p>
                     <pre><code class="javascript" data-trim contenteditable>
+// ES6
+
 let local = "I'm local";
 
 export default function myAwesomeModuleFunction() {
@@ -218,6 +243,8 @@ export const PUBLIC = "I'm public!";
                     Importing
                 </p>
                     <pre><code class="javascript" data-trim contenteditable>
+// ES6
+
 import * as awesomeModule from "lib/myModule";
 awesomeModule.myAwesomeModuleFunction();
 

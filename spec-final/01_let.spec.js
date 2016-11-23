@@ -1,5 +1,5 @@
+// @formatter:off
 jest.autoMockOff();
-
 
 describe('LET', () => {
 

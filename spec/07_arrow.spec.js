@@ -1,3 +1,4 @@
+// @formatter:off
 jest.autoMockOff();
 
 describe('Arrow Functions', () => {

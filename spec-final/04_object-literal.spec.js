@@ -1,5 +1,5 @@
+// @formatter:off
 jest.autoMockOff();
-
 
 describe('Object Literal', () => {
   it('can use shorthand for property names', () => {
@@ -25,6 +25,5 @@ describe('Object Literal', () => {
     expect(godzilla.power).toBe(1000);
     expect(godzilla.attack(mechaGodzilla)).toBe('Godzilla attacked MechaGodzilla');
   });
-
 
 });
