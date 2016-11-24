@@ -473,6 +473,20 @@ npm test spec/06_spread_rest_spec.js
             </section>
             <section>
                 <h2>Arrow Functions</h2>
+                <br>
+                    <pre><code class="javascript" data-trim contenteditable>
+var f1 = () => 12;
+var f2 = x => x * 2;
+var f3 = (x,y) => {
+    var z = x * 2 + y;
+    y++;
+    x *= 3;
+    return (x + y + z) / 2;
+};
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Arrow Functions</h2>
                 <p>
                     The ES 5 Version with binding this manually
                 </p>
@@ -584,13 +598,18 @@ npm test spec/08_class_spec.js
             </section>
             <section>
                 <h2>Set</h2>
-                <br>
+                <p>uniqueness</p>
                     <pre><code class="javascript" data-trim contenteditable>
 let set = new Set();
 
 set.add('GoT Season 6');
 
 set.has('GoT Season 6');//true
+
+// set.delete(...);
+// set.clear();
+// set.size;
+// set.values();
                     </code></pre>
             </section>
             <section>
@@ -602,6 +621,13 @@ let map = new Map();
 map.set('John Snow', {alive: 'Unknown'});
 
 map.get('John Snow');//Object{alive: 'Unknown'}
+
+// map.delete(...);
+// map.clear();
+// map.size;
+// map.entries();
+// map.values();
+// map.keys();
                     </code></pre>
             </section>
             <section>
