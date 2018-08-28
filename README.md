@@ -18,7 +18,7 @@ By the time that the workshop is over, all of your tests will be passing.
 ###Clone the repo
 You will need to start by cloning this repo. From your terminal, type:
 ```
-git clone https://github.com/webplatformz/es6-workshop.git && cd es6-workshop
+git clone https://github.com/fabiankeller/es6-workshop.git && cd es6-workshop
 ```
 
 ###Install Dependencies
@@ -44,23 +44,5 @@ npm test
 This will execute the tests in the `spec` directory. Currently all of these tests are disabled, because I have changed the `it()` statement
 to `xit()`, which will skip that test. Your jobs it to one-by-one turn each test back on and get the test to pass, by
 writing the required ES6 code. Once you have written the required code, the tests will pass, and you can move onto the next test.
-
-As Axel teaches us about ES6, we will take breaks once in a while to run these exercises.
-
-#Thanks
-If you have any questions, [let me know](https://www.twitter.com/js_dev).
-
-If you use this workshop, please Pull Request this readme with a link to your event.
-
-###Events
-[FluentConf 2015 - Axel Rauschmayer & Aaron Frost](http://fluentconf.com/javascript-html-2015/public/schedule/detail/38811)
-Framsieforum 19.05, Finn.no
-
-[SLC JS Learners April 2015 - Kent C. Dodds](https://youtu.be/_Pn32tTtbuQ)
-
-
-
-
-
 
 ------
