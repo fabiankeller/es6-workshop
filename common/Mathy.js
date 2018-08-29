@@ -9,3 +9,7 @@ export function square(num){
 export function diag(x, y){
   return sqrt(square(x) + square(y));
 }
+
+export default function random() {
+  return Math.random();
+}

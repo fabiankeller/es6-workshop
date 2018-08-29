@@ -3,6 +3,7 @@
 import * as Mathy from "../common/Mathy";
 import * as myMathy from "../common/Mathy";
 import {sqrt as mySqrt, square as mySquare} from "../common/Mathy";
+import random from "../common/Mathy";
 import _ from "lodash";
 
 
@@ -36,6 +37,14 @@ describe('ES6 Modules', () => {
     expect(mySquare).toBeDefined();
     expect(mySqrt).toEqual(Mathy.sqrt);
     expect(mySquare).toEqual(Mathy.square);
+  });
+
+  it('can import default export from Mathy', () => {
+
+    //import default export random from Mathy
+
+    expect(random).toBeDefined();
+
   });
 
   it('can import from my node_modules', () => {

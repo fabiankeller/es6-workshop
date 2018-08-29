@@ -38,10 +38,19 @@ describe('ES6 Modules', () => {
     expect(mySquare).toEqual(Mathy.square);
   });
 
+  xit('can import default export from Mathy', () => {
+
+    //import default export random from Mathy
+    //NOTE: All import statements have to be done at the top of the file
+
+    expect(random).toBeDefined();
+
+  });
+
   xit('can import from my node_modules', () => {
 
     //import `lodash`
-    //NOTE: All import statements have to be done at the top of the file
+	//NOTE: All import statements have to be done at the top of the file
 
     expect(_).toBeDefined();
 
