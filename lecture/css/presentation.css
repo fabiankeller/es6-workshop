@@ -18,3 +18,7 @@ body.print-pdf section.zuehlke-bg-parallax{
     background-size: auto 100%;
     background-repeat: no-repeat;
 }
+
+section pre code {
+    max-height: 600px !important;
+}

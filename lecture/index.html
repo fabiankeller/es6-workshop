@@ -4,10 +4,9 @@
 <head>
     <meta charset="utf-8">
 
-    <title>.: ECMAScript 6 :.</title>
+    <title>.: ECMAScript 6 & Beyond :.</title>
 
-    <meta name="description" content="Preview of the upcoming ECMAScript 6 specification">
-    <meta name="author" content="Patrick Walther">
+    <meta name="author" content="Fabian Keller">
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -37,7 +36,7 @@
             <div class="zuehlke-center" style="margin-top: 30px;">
                 <img class="fragment" data-fragment-index="1" src="images/es2015.jpg"/>
                 <div style="margin-top: 40px; font-weight: bold; letter-spacing: 0.2em;">
-                    Coding Session - ECMA Script 6
+                    Learning Session - ECMA Script 6 & beyond
                 </div>
                 <div style="margin-top: 40px; font-weight: bold; letter-spacing: 0.2em;" class="fragment"
                      data-fragment-index="1">ECMA Script 2015
@@ -46,30 +45,34 @@
         </section>
 
         <section>
-            <div class="zuehlke-center">
-                git clone <a href="https://github.com/fabiankeller/es6-workshop.git">https://github.com/fabiankeller/es6-workshop.git</a>
+            <div>
+                <h2>Setup</h2>
+                <pre><code data-trim contenteditable>
+$ git clone <a href="https://github.com/fabiankeller/es6-workshop.git">https://github.com/fabiankeller/es6-workshop.git</a>
+
+$ cd es6-workshop
+
+$ npm install
+                </code></pre>
             </div>
         </section>
         <section>
-            <section data-state='orange'>
-                <div class="zuehlke-center">
-                    <div class="zuehlke-splash-title">ES6 in SAM</div>
-                </div>
-            </section>
-        </section>
-        <section>
-            <div class="zuehlke-center">
+            <div>
                 <h2>Topics</h2>
                 <ul>
                     <li class="fragment" data-fragment-index="1">let &amp; const</li>
                     <li class="fragment" data-fragment-index="2">destructuring</li>
                     <li class="fragment" data-fragment-index="3">modules</li>
-                    <li class="fragment" data-fragment-index="4">object-literal</li>
+                    <li class="fragment" data-fragment-index="4">template literals</li>
                     <li class="fragment" data-fragment-index="5">default parameters</li>
                     <li class="fragment" data-fragment-index="6">spread &amp; rest</li>
                     <li class="fragment" data-fragment-index="7">arrow functions (lambdas)</li>
                     <li class="fragment" data-fragment-index="8">classes</li>
                     <li class="fragment" data-fragment-index="9">set &amp; maps</li>
+                    <li class="fragment" data-fragment-index="10">iterator (for...of loop)</li>
+                    <li class="fragment" data-fragment-index="11">promises</li>
+                    <li class="fragment" data-fragment-index="12">generators</li>
+                    <li class="fragment" data-fragment-index="13">ES7 &amp; Beyond</li>
                 </ul>
             </div>
         </section>
@@ -84,7 +87,7 @@
                     <h2>var</h2>
                     <p>function scoped variable</p>
                     <pre><code class="javascript" data-trim contenteditable>
-// ES5
+// Before ES6
 
 function varTest() {
 	var x = 31;
@@ -150,19 +153,19 @@ npm test spec/01_let_spec.js
             </section>
             <section>
                 <h2>Destructuring</h2>
-                <p>structural assignment</p>
+                <p>Array Matching (structural assignment)</p>
                     <pre><code class="javascript" data-trim contenteditable>
 //Matching
-let [first, second] = [1, 2, 3, 4];
-console.log(first + " and " + second); // 1 and 2
+let [first, second] = [1, 2, 3, 4]; // first=1, second=2
 
 //With rest param
-let [first, ...rest] = [1, 2, 3, 4];
-console.log(rest); // 2,3,4
+let [first, ...rest] = [1, 2, 3, 4]; // rest=[2,3,4]
+
+//Leaving out some values
+let [first, , , fourth] = [1, 2, 3, 4]; // first=1, fourth=4
 
 //swapping
-[first, second] = [second, first];
-console.log(first + " and " + second); // 2 and 1
+[first, second] = [second, first]; // first=1, second=2
                     </code></pre>
             </section>
             <section>
@@ -202,7 +205,7 @@ npm test spec/02_destructuring_spec.js
                     Old way
                 </p>
                     <pre><code class="javascript" data-trim contenteditable>
-// ES5
+// Before ES6
 
 function Hello(name) {
     function greeting() {
@@ -229,8 +232,12 @@ me.greeting();          // Hello Kyle!
 
 let local = "I'm local";
 
-export default function myAwesomeModuleFunction() {
+export default function foo() {
     /* some awesome function stuff */
+}
+
+export function bar() {
+    /* some more awesome function stuff */
 }
 
 export const PUBLIC = "I'm public!";
@@ -239,21 +246,56 @@ export const PUBLIC = "I'm public!";
             <section>
                 <h2>Modules</h2>
                 <p>
-                    Importing
+                    Importing - part 1
                 </p>
-                    <pre><code class="javascript" data-trim contenteditable>
+                <pre><code class="javascript" data-trim contenteditable>
+export default function foo() {
+    /* some awesome function stuff */
+}
+
+export const PUBLIC = "I'm public!";
+                    </code></pre>
+                <pre><code class="javascript" data-trim contenteditable>
 // ES6
+// import defaultMember, { member } from "module-name";
+// import defaultMember, * as alias from "module-name";
+// import defaultMember from "module-name";
+
+import awesomeFunc from "lib/myModule";
+awesomeFunc();
+
+import foo, {PUBLIC as publicVar} from "lib/myModule";
+foo();
+console.log(publicVar}; // I'm public!
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Modules</h2>
+                <p>
+                    Importing - part 2
+                </p>
+                <pre><code class="javascript" data-trim contenteditable>
+export function foo() {
+    /* some awesome function stuff */
+}
+
+export function bar() {
+    /* some more awesome function stuff */
+}
+                </code></pre>
+                <pre><code class="javascript" data-trim contenteditable>
+// ES6
+// import name from "module-name";
+// import * as name from "module-name";
+// import { member } from "module-name";
+// import { member as alias } from "module-name";
 
 import * as awesomeModule from "lib/myModule";
-awesomeModule.myAwesomeModuleFunction();
+awesomeModule.bar();
 
-import as awesomeModule from "lib/myModule";
-awesomeModule();
-
-import PUBLIC as publicVar from "lib/myModule";
-console.log(publicVar}; // I'm public!
-
-                    </code></pre>
+import {bar as moreAwFunc} from "lib/myModule";
+moreAwFunc();
+                </code></pre>
             </section>
             <section>
                 <div>
@@ -268,14 +310,14 @@ npm test spec/03_modules_spec.js
         <section>
             <section data-state='orange'>
                 <div class="zuehlke-center">
-                    <div class="zuehlke-splash-title">Object Literal</div>
+                    <div class="zuehlke-splash-title">Template Literals</div>
                 </div>
             </section>
             <section>
                 <h2>Object Literal</h2>
                 <p>old way</p>
                     <pre><code class="javascript" data-trim contenteditable>
-// ES5
+// Before ES6
 
 let firstName = "Spongebob";
 let lastName = "Squarepants";
@@ -290,9 +332,9 @@ console.log({
                     </code></pre>
             </section>
             <section>
-                <h2>Object Literal</h2>
+                <h2>Enhanced Object Literal</h2>
                 <br>
-                    <pre><code class="javascript" data-trim contenteditable>
+				<pre><code class="javascript" data-trim contenteditable>
 // ES6
 
 let firstName = "Spongebob";
@@ -305,23 +347,48 @@ console.log({
         return firstName + " " + lastName;
     }
 });
-                    </code></pre>
+				</code></pre>
             </section>
+			<section>
+				<h2>String Interpolation</h2>
+				<br>
+				<pre><code class="javascript" data-trim contenteditable>
+// ES6
+// back-ticks instead of single quotes
+
+const customer = { name: "Foo" };
+const card = { amount: 7, product: "Bar", price: 42 };
+
+console.log(`Hello ${customer.name},
+want to buy ${card.amount} ${card.product} for
+a total of ${card.amount * card.unitprice} bucks?`);
+				</code></pre>
+			</section>
             <section>
                 <h2>Object.is</h2>
+				<p>checks if values are <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness">the same value</a></p>
+				<ul>
+					<li>strict equality (===) => without type conversion</li>
+					<li>loose equality (==) => perform type conversion</li>
+					<li>Object.is() => same as strict equality with special handling for NaN, -0 and +0</li>
+				</ul>
                 <br>
                     <pre><code class="javascript" data-trim contenteditable>
 NaN === NaN; //false
-
 Object.is(NaN, NaN); // true
+
+-0 === +0 // true
+Object.is(-0, +0); // false
                     </code></pre>
             </section>
             <section>
                 <h2>Object.assign</h2>
-                <p>
-                    jQuery.extend functionality
-                </p>
+                <p>jQuery.extend functionality</p>
                     <pre><code class="javascript">
+// Object.assign(target, ...sources);
+// Properties in target will be
+// overwritten by properties in sources
+
 let a = {name: "JavaScript"};
 let b = {name: "ECMAScript", isOnTrack: true};
 
@@ -337,9 +404,9 @@ Object.assign(a, b);
             <section>
                 <div>
                     <h2>Exercise 4</h2>
-                    <p>file: spec/04_object-literal_spec.js</p>
+                    <p>file: spec/04_template-literal_spec.js</p>
                     <pre><code class="dos" data-trim contenteditable>
-npm test spec/04_object-literal_spec.js
+npm test spec/04_template-literal_spec.js
                     </code></pre>
                 </div>
             </section>
@@ -354,20 +421,19 @@ npm test spec/04_object-literal_spec.js
                 <h2>default parameter values</h2>
                 <p>old way</p>
                     <pre><code class="javascript">
-// ES5
+// Before ES6
 
-function add(x, y) {
+add = (x, y) => {
 	x = x || 11;
 	y = y || 12;
 	console.log( x + y);
 }
 
-add();      // 23
+add();          // 23
 add(5, 6);      // 11
-add(5);     // 17
-add(null, 6);       // 17
+add(5);         // 17
+add(null, 6);   // 17
 add(0, 42);     // 53
-
                     </code></pre>
             </section>
             <section>
@@ -375,15 +441,15 @@ add(0, 42);     // 53
                     <pre><code class="javascript">
 // ES6
 
-function add(x = 11, y = 12) {      // default values
+add = (x = 11, y = 12) => {      // default values
 	console.log( x + y );
 }
 
-add();      // 23
-add(5, 6);      // 11
-add(5);     // 17
-add(null, 6);       // 6 (null is interpreted as 0)
-add(0, 42);     // 42
+add();         // 23
+add(5, 6);     // 11
+add(5);        // 17
+add(null, 6);  // 6 (null is interpreted as 0)
+add(0, 42);    // 42
 
                     </code></pre>
             </section>
@@ -391,11 +457,13 @@ add(0, 42);     // 42
                 <h2>default parameter expressions</h2>
                 <p>lazy evaluated</p>
                     <pre><code class="javascript">
-
-function foo(x = y + 3, z = bar(x)) {
+foo = (x = y + 3, z = bar(x)) => {
 	// some functionality
 }
 
+bar = (x) => {
+	return x * 4;
+}
                     </code></pre>
             </section>
             <section>
@@ -450,8 +518,8 @@ var b = [1, …a, 5];	// [1, 2, 3, 4, 5]
 function bar(x, y, …z) {
 	console.log(x, y, z);
 }
-bar(1, 2, 3, 4, 5);	 // 1, 2, [3, 4, 5]
 
+bar(1, 2, 3, 4, 5);	 // 1, 2, [3, 4, 5]
                     </code></pre>
             </section>
             <section>
@@ -474,10 +542,10 @@ npm test spec/06_spread_rest_spec.js
                 <h2>Arrow Functions</h2>
                 <br>
                     <pre><code class="javascript" data-trim contenteditable>
-var f1 = () => 12;
-var f2 = x => x * 2;
-var f3 = (x,y) => {
-    var z = x * 2 + y;
+const f1 = () => 12;
+const f2 = x => x * 2;
+const f3 = (x,y) => {
+    let z = x * 2 + y;
     y++;
     x *= 3;
     return (x + y + z) / 2;
@@ -490,7 +558,7 @@ var f3 = (x,y) => {
                     The ES 5 Version with binding this manually
                 </p>
                     <pre><code class="javascript" data-trim contenteditable>
-var reorgBuilder = {
+const reorgBuilder = {
     name: "Awesome new Reorg",
 
     createNewReorg: function createNewReorg() {
@@ -502,7 +570,7 @@ var reorgBuilder = {
     }
 };
 
-var newReorg = reorgBuilder.createNewReorg();
+const newReorg = reorgBuilder.createNewReorg();
 newReorg();
                     </code></pre>
             </section>
@@ -511,8 +579,11 @@ newReorg();
                 <p>
                     ES 6 Arrow Function and this binding
                 </p>
+                <ul>
+                    <li>adopt this binding from enclosing scope</li>
+                </ul>
                     <pre><code class="javascript" data-trim contenteditable>
-let reorgBuilder = {
+const reorgBuilder = {
     name: "Awesome new Reorg",
 
     createNewReorg() {
@@ -521,7 +592,7 @@ let reorgBuilder = {
     }
 };
 
-let newReorg = reorgBuilder.createNewReorg();
+const newReorg = reorgBuilder.createNewReorg();
 newReorg();
                     </code></pre>
             </section>
@@ -545,7 +616,27 @@ npm test spec/07_arrow_spec.js
             <section>
                 <h2>Class</h2>
                 <br>
+                <pre><code class="javascript" data-trim contenteditable>
+// Before ES6
+
+var Car = function(name) {
+    this.name = name;
+}
+
+Car.prototype.getName() {
+    return this.name;
+}
+
+var car = Car('Elfriede');
+console.log(car.getName()); // Elfriede
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Class</h2>
+                <br>
                     <pre><code class="javascript" data-trim contenteditable>
+// ES6
+
 class Car {
   constructor(name) {
     this.name = name;
@@ -556,7 +647,7 @@ class Car {
   }
 }
 
-let car = new Car("Elfriede");
+let car = new Car('Elfriede');
 console.log(car.getName()); // Elfriede
                     </code></pre>
             </section>
@@ -566,8 +657,8 @@ console.log(car.getName()); // Elfriede
                     <pre><code class="javascript" data-trim contenteditable>
 class SpecialCar extends Car {
   constructor(name) {
-    super("normal name");
-    this.specialName = name;
+    super(name);
+    this.specialName = 'Special-' + name;
   }
   
   getSpecialName() {
@@ -576,7 +667,8 @@ class SpecialCar extends Car {
 }
 
 let car = new SpecialCar("Elfriede");
-console.log(car.getSpecialName()); // Elfriede
+console.log(car.getSpecialName()); // Special-Elfriede
+console.log(car.getName());        // Elfriede
                     </code></pre>
             </section>
             <section>
@@ -602,8 +694,10 @@ npm test spec/08_class_spec.js
 let set = new Set();
 
 set.add('GoT Season 6');
+set.add('GoT Season 6');
 
-set.has('GoT Season 6');//true
+set.has('GoT Season 6');   //true
+set.size;                  // 1
 
 // set.delete(...);
 // set.clear();
@@ -619,7 +713,7 @@ let map = new Map();
 
 map.set('John Snow', {alive: 'Unknown'});
 
-map.get('John Snow');//Object{alive: 'Unknown'}
+map.get('John Snow');       //Object{alive: 'Unknown'}
 
 // map.delete(...);
 // map.clear();
@@ -639,24 +733,380 @@ npm test spec/09_set_map_spec.js
                 </div>
             </section>
         </section>
+        <section>
+            <section data-state='orange'>
+                <div class="zuehlke-center">
+                    <div class="zuehlke-splash-title">Iterator (for...of loop)</div>
+                </div>
+            </section>
+            <section>
+                <h2>Symbol Type</h2>
+                <p>Unique and immutable data type as an identifier for object properties</p>
+                <pre><code class="javascript" data-trim contenteditable>
+Symbol('foo') !== Symbol('foo');    // true
+const foo = Symbol();
+const bar = Symbol();
+let obj = {};
+obj[foo] = 'foo';
+obj[bar] = 'bar';
+JSON.stringify(obj);                // {}
+Object.keys(obj);                   // []
+Object.getOwnPropertyNames(obj);    // []
+Object.getOwnPropertySymbols(obj);  // [ foo, bar ]
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Iterable</h2>
+                <p>support 'iterable' protocol to allow objects
+                    to customize their iteration behaviour</p>
+                <pre><code class="javascript" data-trim contenteditable>
+let fibonacci = {
+    [Symbol.iterator]() {
+        let pre = 0, cur = 1;
+        return {
+           next() {
+               [ pre, cur ] = [ cur, pre + cur ];
+               return { done: false, value: cur };
+           }
+        }
+    }
+}
 
+for (let n of fibonacci) {
+    if (n > 1000) { break; }
+    console.log(n)
+}
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section data-state='orange'>
+                <div class="zuehlke-center">
+                    <div class="zuehlke-splash-title">Promises</div>
+                </div>
+            </section>
+            <section>
+                <h2>Callbacks</h2>
+                <pre><code class="javascript" data-trim contenteditable>
+// Before ES6
 
+function msgAfterTimeout(msg, who, timeout, done) {
+    setTimeout(function() {
+        done(msg + ' Hello ' + who + '!');
+    }, timeout);
+}
+
+function callback(msg) {
+    console.log(msg);
+}
+
+msgAfterTimeout("", "Foo", 100, callback);
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Callbacks</h2>
+                <ul>
+                    <li>Inversion of control</li>
+                    <li>Trust issues</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+// Before ES6
+// never called, called more then once
+
+function pay(msg) {
+    // charge some bank account
+}
+
+thirdPartyMethod(100, pay);
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Promise</h2>
+                <ul>
+                    <li>representation of a value that may be asynchronously</li>
+                    <li>single resolution (immutable if resolved)</li>
+                    <li>single resolution value</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+const promise1 = Promise.resolve(3);
+const promise2 = new Promise((resolve, reject) => {
+    try {
+          resolve(getAmountFromServer());
+    } catch(error) {
+          reject(error);
+    }
+});
+                </code></pre>
+            </section>
+            <section>
+                <h2>Promise</h2>
+                <p>Promise.then(succ, err) and Promise.catch(err)</p>
+                <pre><code class="javascript" data-trim contenteditable>
+// .then(successFunc, errorFunc) returns another Promise
+promise1
+    .then((result) => {
+          // do something with the result
+    }, (error) => {
+         console.log(error);
+    });
+    .then((result) => {
+          // do something with the result
+    });
+
+// .catch(errorFunc) same as .then(null, errorFunc)
+promise2
+    .then((result) => {
+          // do something with the result
+    })
+    .catch((error) => {
+         console.log(error);
+    });
+                </code></pre>
+                <p class="fragment" data-fragment-index="1">Do you see any important difference?</p>
+            </section>
+            <section>
+                <h2>Promise</h2>
+                <p>Promise.all(...promises);</p>
+                <pre><code class="javascript" data-trim contenteditable>
+// Promise.all(...promises) returns a Promise
+// this new Promise waits till all Promises are resolved
+// if one fails, returned Promise is rejected
+
+Promise.all([promise1, promise2])
+    .then((values) => {
+         console.log(`${values[0]} and ${values[1]});
+    })
+    .catch((error) => {
+         console.log(error);
+    });
+                </code></pre>
+            </section>
+            <section>
+                <h2>Promise</h2>
+                <p>Promise.race(...promises)</p>
+                <pre><code class="javascript" data-trim contenteditable>
+// Promise.race(...promises) waits for the first
+// Promise to resolve or reject.
+
+Promise.race([promise1, promise2])
+    .then((values) => {
+         console.log(`${values[0]} and ${values[1]});
+    });
+                </code></pre>
+            </section>
+            <section>
+                <h2>Promise</h2>
+                <p>doesn't release <a href="https://oren.github.io/blog/zalgo.html">Zalgo</a></p>
+                <pre><code class="javascript" data-trim contenteditable>
+// Does anybody see a problem with this code?
+let count = 1;
+someMethodWithCallbacks((value) => {
+    count += value;
+});
+console.log(count);         // whats the output?
+                </code></pre>
+                <pre class="fragment" data-fragment-index="1"><code class="javascript" data-trim contenteditable>
+// Promises solve this issue, because always async
+function eitherSyncOrAsyncValue() {
+    return new Promise((resolve, reject) => {
+        // sync or async value resolution
+    })
+}
+
+let count = 1;
+eitherSyncOrAsyncValue()
+    .then((value) => {
+        count += value;
+    });
+console.log(count);         // predictable output 1
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section data-state='orange'>
+                <div class="zuehlke-center">
+                    <div class="zuehlke-splash-title">Generators</div>
+                </div>
+            </section>
+            <section>
+                <h2>Generators</h2>
+                <ul>
+                    <li>* keyword</li>
+                    <li>breaking run-to-completion</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+function *foo() {          // mark method as generator
+    x++;
+    yield;
+    console.log(x);
+}
+                    </code></pre>
+                <pre><code class="javascript" data-trim contenteditable>
+var it = foo();
+it.next();                 // start foo() here
+console.log(x);            // 2
+x++;
+it.next();
+console.log(x);            // 3
+                    </code></pre>
+            </section>
+        </section>
         <section>
             <div class="zuehlke-center">
                 <a href="https://github.com/getify/You-Dont-Know-JS">https://github.com/getify/You-Dont-Know-JS</a>
             </div>
         </section>
+        <section>
+            <section data-state='orange'>
+                <div class="zuehlke-center">
+                    <div class="zuehlke-splash-title">ES7 (ECMAScript 2016)</div>
+                </div>
+            </section>
+            <section>
+                <h2>Array.prototype.includes()</h2>
+                <p>old way to check if array includes a specific value</p>
+                <ul>
+                    <li>can't handle NaN</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+// Before ES7
+
+let numbers = [1, 2, 3, 4, NaN];
+
+if(numbers.indexOf(2) !== -1) {          // true
+  console.log('Array contains value');
+}
+console.log(numbers.indexOf(NaN));       // -1
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Array.prototype.includes()</h2>
+                <p>new way to check if array includes a specific value</p>
+                <ul>
+                    <li>can handle NaN</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+// ES7
+
+let numbers = [1, 2, 3, 4, NaN];
+
+if(numbers.includes(2)) {
+  console.log('Array contains value');
+}
+console.log(numbers.includes(NaN));      // true
+                    </code></pre>
+            </section>
+            <section>
+                <h2>Exponentiation Operator</h2>
+                <pre><code class="javascript" data-trim contenteditable>
+// already existing operators: +, -, *
+// new operator: **
+
+let base = 3;
+let exponent = 4;
+let result = base**exponent;
+console.log(result); //81
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section data-state='orange'>
+                <div class="zuehlke-center">
+                    <div class="zuehlke-splash-title">ES8 (ECMAScript 2017)</div>
+                </div>
+            </section>
+            <section>
+                <h2>Object.values and Object.entries</h2>
+                <pre><code class="javascript" data-trim contenteditable>
+const obj = {
+    name: 'Marko',
+    lastname: 'Ic'
+}
+Object.values(obj);
+// ['Marko', 'Ic']
+
+Object.entries(obj);
+// [['name', 'Marko'], ['lastname', 'Ic']]
+                    </code></pre>
+            </section>
+            <section>
+                <h2>async functions</h2>
+                <ul>
+                    <li>defines an asynchronous function</li>
+                    <li>always returns a promise (auto wrapping)</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+async function sayHello() {
+  return 'Hello!';
+}
+
+sayHello()
+  .then((result) => {
+      console.log(result);
+});
+                </code></pre>
+            </section>
+            <section>
+                <h2>async/await</h2>
+                <ul>
+                    <li>waits until Promise settles and return its result</li>
+                    <li>await keyword can only be used in async functions</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+function fetchTextByPromise() {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve("es8");
+    }, 2000);
+  });
+}
+
+async function sayHello() {
+  const text = await fetchTextByPromise();
+  console.log(`Hello, ${text}`);
+}
+
+console.log(1);
+sayHello();
+console.log(2);
+// 1
+// 2
+// Hello, es8 (After about 2 sec)
+                </code></pre>
+            </section>
+            <section>
+                <h2>async/await</h2>
+                <ul>
+                    <li>write asynchronous code in synchronous way</li>
+                </ul>
+                <pre><code class="javascript" data-trim contenteditable>
+async function showAvatar() {
+
+  // read our JSON
+  let user = await fetch('/user.json');
+
+  // read github user
+  let githubUser = await
+      fetch(`https://api.github.com/users/${user.name}`);
+
+  // show the avatar
+  let img = createAvatarOfUser(githubUser);
+  document.body.append(img);
+
+  return githubUser;
+}
+
+showAvatar();
+                </code></pre>
+            </section>
+        </section>
+
         <section data-transition="linear" data-state="zuehlke-bg-parallax" data-parallax-step=0>
             <div class="zuehlke-center">
                 <div class="zuehlke-splash-title">Any Questions?</div>
             </div>
         </section>
         <section data-transition="linear" data-state="zuehlke-bg-parallax" data-parallax-step=1>
-            <div class="zuehlke-center">
-                <div class="zuehlke-splash-title">Feedback</div>
-            </div>
-        </section>
-        <section data-transition="linear" data-state="zuehlke-bg-parallax" data-parallax-step=2>
             <div class="zuehlke-center">
                 <div class="zuehlke-splash-title">Thank you!</div>
             </div>
