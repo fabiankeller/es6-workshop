@@ -942,14 +942,112 @@ function *foo() {          // mark method as generator
 }
                     </code></pre>
                 <pre><code class="javascript" data-trim contenteditable>
-var it = foo();
+let x = 1;
+const it = foo();
+
 it.next();                 // start foo() here
 console.log(x);            // 2
 x++;
-it.next();
-console.log(x);            // 3
+
+it.next();                 // 3
                     </code></pre>
             </section>
+			<section>
+				<h2>Generators</h2>
+				<p>Iteration messaging</p>
+				<pre><code class="javascript" data-trim contenteditable>
+function *foo(x) {
+	var y = x * (yield);
+	var z = y / (yield 'Hello!');
+	return { y , z };
+}
+
+var it = foo( 6 );
+
+it.next();                   // start `foo(..)`
+
+it.next( 7 );                // y = 6 * 7 = 42
+console.log(it.value);       // Hello!
+
+var res = it.next( 6 );
+res.value;                   // { y: 42, z: 7 }
+                    </code></pre>
+			</section>
+			<section>
+				<h2>Generators</h2>
+				<p>combined with Promises</p>
+				<pre><code class="javascript" data-trim contenteditable>
+function request(url) {
+    return new Promise((resolve, reject) => {
+         ajax(url, (err, data) => {
+             if (err) {
+                 reject(err);
+             } else {
+                 resolve(data);
+             }
+         });
+    });
+}
+
+function *main() {
+	try {
+		const firstname = yield request('some.url.1');
+		const lastname = yield request('some.url.2');
+	} catch (err) {
+		console.error( err );
+	}
+}
+
+run(main);               // runner utility
+                    </code></pre>
+			</section>
+			<section>
+				<h2>Generators</h2>
+				<p>runner utility</p>
+				<pre><code class="javascript" data-trim contenteditable>
+function run(gen) {
+	var args = [].slice.call( arguments, 1), it;
+
+	// initialize the generator in the current context
+	it = gen.apply( this, args );
+
+	// return a promise for the generator completing
+	return Promise.resolve()
+		.then( function handleNext(value){
+			// run to the next yielded value
+			var next = it.next( value );
+
+			return (function handleResult(next){
+				// generator has completed running?
+				if (next.done) {
+					return next.value;
+				}
+				// otherwise keep going
+				else {
+					return Promise.resolve( next.value )
+						.then(
+							// resume the async loop on
+							// success, sending the resolved
+							// value back into the generator
+							handleNext,
+
+							// if `value` is a rejected
+							// promise, propagate error back
+							// into the generator for its own
+							// error handling
+							function handleErr(err) {
+								return Promise.resolve(
+									it.throw( err )
+								)
+								.then( handleResult );
+							}
+						);
+				}
+			})(next);
+		} );
+}
+                    </code></pre>
+			</section>
         </section>
         <section>
             <div class="zuehlke-center">
@@ -1125,6 +1223,8 @@ showAvatar();
         progress: true,
         history: true,
         center: true,
+
+		width: 1200,
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
         transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
